@@ -1,25 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect} from "react";
+import alanBtn from '@alan-ai/alan-sdk-web'
+import AnimeCards from './components/AnimeCards/AnimeCards'
+import { Button } from '@material-ui/core'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+ const App = ( ) => {
+  const [theAnimes, setTheAnime] = useState([])
+
+
+  const alanKey = 'e842d2abfa21c2901693dfd552360efe2e956eca572e1d8b807a3e2338fdd0dc/stage'
+  function refreshPage() {
+    window.location.reload(false);
+  }
+  useEffect(() => {
+    alanBtn({
+      key:alanKey,
+      onCommand: ({command, animes, titles}) =>{
+        // eslint-disable-next-line no-sequences
+        if(command === 'searchedAnimes' , animes){
+          // alert('this works')
+          setTheAnime(animes)
+        }
+      }
+    })
+
+  }, [])
+  return(
+    <div>
+          <Button onClick={refreshPage} size='small' color='primary' variant='contained'>Click to reload!</Button>
+      <AnimeCards theAnimes={theAnimes} />
     </div>
-  );
+  )
 }
+export default App
 
-export default App;
