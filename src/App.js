@@ -27,7 +27,7 @@ import { Button } from '@material-ui/core'
   }, [])
   return(
     <div>
-          <Button onClick={refreshPage} size='small' color='primary' variant='contained'>Click to reload!</Button>
+          <Button onClick={refreshPage} size='small' color='primary' variant='contained'>Click to reload :) !</Button>
       <AnimeCards theAnimes={theAnimes} />
     </div>
   )
